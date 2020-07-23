@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+        <script src="{{ url_for('static', filename='chatroom.js') }}"></script>
+        <title>{{ roomname }}</title>
+    </head>
+    <body>
+        <h1>welcome to {{ roomname }}</h1>
+        <h2>{{chatid}}</h2>
+        <hr>
+        <h3>messages</h3>
+        <ul id="messages"> 
+            {% if messages %}
+            {% for i in messages %}
+            <li>{{ i }}</li>
+            {% endfor %}
+            {% endif %}
+        </ul>
+        <hr>
+        <h3>enter your message here</h3>
+        <div>
+            <form>
+                <input data-val= "{{ username }}" type="text" name="message" placeholder="enter message">
+                <button>submit!</button>
+            </form>    
+        </div>
+        <hr>
+        <a href="{{ url_for('roomlist') }}" id="leave">Leave Room</a>
+        <hr>
+        <a href="{{ url_for('logout') }}">Logout</a>
+        <input type="hidden" id="refresh" value="no">
+    </body>
+</html>
