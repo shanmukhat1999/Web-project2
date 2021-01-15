@@ -1,2 +1,2 @@
-web: python3 application.py 0.0.0.0:$5000
+web: python3 application.py $PORT
 heroku ps:scale web=1
