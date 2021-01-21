@@ -39,6 +39,8 @@ def logout():
         k=session.pop("username")
     except KeyError:
         return render_template("error.html",message="you are not logged in yet")
+    if "chatid" in session:
+        session.pop("chatid")    
     users.remove(k)
     return redirect(url_for('index'))
 
@@ -63,32 +65,26 @@ def roomlist():
             session.pop("chatid")       
     return render_template("roomlist.html",rooms=rooms)      
 
-@app.route("/chatroom/<int:chatid>",methods=["GET","POST"])
+@app.route("/chatroom/<int:chatid>",methods=["GET"])
 def chatroom(chatid):
-    if request.method == "POST":
-        
-        roomname=request.form.get("roomname")
-        if roomname in rooms:
-            return render_template("error.html",message="this room name already exists")
-        session["chatid"]=chatid
-        rooms.append(roomname)
-        i=int(session["chatid"])
-        messages[i]=[]
-
     if request.method == "GET":
         if "username" not in session:
             return render_template("error.html",message="you have to log in first")
         if chatid > len(rooms):
             return render_template("error.html",message="this room doesnot exist")    
         roomname=rooms[chatid-1]
-        session["chatid"]=chatid
-    return render_template("chatroom.html",roomname=roomname,messages=messages[session["chatid"]],chatid=session["chatid"],username=session["username"])     
+        session["chatid"]=str(chatid)
+    return render_template("chatroom.html",roomname=roomname,messages=messages[chatid],chatid=session["chatid"],username=session["username"])     
         
 
 @socketio.on('new room')
 def new_room(data):
+    global rooms
     roomname=data["roomname"]
-    emit('add room',{"chatid":len(rooms)+1,"roomname":roomname},broadcast=True)
+    rooms.append(roomname)
+    i=len(rooms)-1
+    messages[i+1]=[]
+    emit('add room',{"chatid":len(rooms),"roomname":roomname},broadcast=True)
 
 @socketio.on('new message')
 def new_message(data):
@@ -100,7 +96,7 @@ def new_message(data):
     dt_string = now.strftime("%d/%m/%Y %H:%M:%S")	
     k="<"+dt_string+" >\t\t\t\t"+username+" : "+message
     messages[i].append(k)    
-    emit('add message',{"message":k,"chatid":i},broadcast=True)     
+    emit('add message',{"message":k,"chatid":i},broadcast=True)    
 
  
 port = int(os.environ.get("PORT", 5000))
