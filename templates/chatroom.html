@@ -20,10 +20,10 @@
         <hr>
         <h3>enter your message here</h3>
         <div>
-            <form>
-                <input data-val= "{{ username }}" type="text" name="message" placeholder="enter message">
-                <button>submit!</button>
-            </form>    
+            <div>
+                <input data-val= "{{ username }}" type="text" name="message" placeholder="enter message" id="input_field">
+                <button id="b">send</button>
+            </div>    
         </div>
         <hr>
         <a href="{{ url_for('roomlist') }}" id="leave">Leave Room</a>
