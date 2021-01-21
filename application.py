@@ -15,7 +15,7 @@ Session(app)
 
 # configuring socketio
 app.config["SECRET_KEY"] = 'thisisasecret'
-socketio = SocketIO(app,None)
+socketio = SocketIO(app)
 
 rooms = [] 
 users = []  
