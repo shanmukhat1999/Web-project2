@@ -16,10 +16,14 @@
         </ul>
         <hr>
         <h3>create your own room</h3>
-        <form action="{{ url_for('chatroom',chatid=rooms|length+1) }}" method="POST">
+        <!--<form action="{{ url_for('chatroom',chatid=rooms|length+1) }}" method="POST">
             <input type="text" name="roomname" placeholder="enter roomname">
             <button>submit!</button>
-        </form>
+        </form>-->
+        <div>
+            <input type="text" name="roomname" placeholder="enter roomname" id="input_field">
+            <button id="b">create</button>
+        </div>
         <hr>
         <a href="{{ url_for('logout') }}">Logout</a>
         <input type="hidden" id="refresh" value="no">
