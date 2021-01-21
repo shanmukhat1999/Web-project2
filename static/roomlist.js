@@ -15,16 +15,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     
     //reload when back/front are used in the browser
-    if ((document.querySelector('#refresh').value) === "no")
+    if(!!window.performance && window.performance.navigation.type == 2)
     {
-        document.querySelector('#refresh').value="yes";
-    }
-    else
-    {
-        document.querySelector('#refresh').value="no";
-        window.location=window.location;
-    }
-
+    window.location.reload(true);
+    } 
     // Connect to websocket
     var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
 
