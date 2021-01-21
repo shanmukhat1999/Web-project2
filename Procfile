@@ -1,2 +1,2 @@
-web: python3 application.py
+web: gunicorn -k eventlet app:application
 heroku ps:scale web=1
