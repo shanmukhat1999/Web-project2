@@ -8,5 +8,5 @@ itsdangerous==1.1.0
 Jinja2==2.10.1
 MarkupSafe==1.1.1
 Click==7.0
-gunicorn==18.0.0
+gunicorn==19.5.0
 eventlet==0.17.4
