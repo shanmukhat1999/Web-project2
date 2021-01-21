@@ -14,15 +14,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     //Refreshing when pressed back/front buttons
-    if ((document.querySelector('#refresh').value) === "no")
+    if(!!window.performance && window.performance.navigation.type == 2)
     {
-        document.querySelector('#refresh').value="yes";
-    }
-    else
-    {
-        document.querySelector('#refresh').value="no";
-        window.location=window.location;
-    }
+    window.location.reload(true);
+    } 
     // saving the chatid in localstorage to the room number
     if(!(localStorage.getItem("chatid")))
     {
