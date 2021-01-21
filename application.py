@@ -15,7 +15,7 @@ Session(app)
 
 # configuring socketio
 app.config["SECRET_KEY"] = 'thisisasecret'
-socketio = SocketIO(app)
+socketio = SocketIO(app,None)
 
 rooms = [] 
 users = []  
@@ -100,7 +100,7 @@ def new_message(data):
 
  
 if __name__ == '__main__':
-    app.run(threaded=True, port=5000)
+    socketio.run(app)
 
 
 
