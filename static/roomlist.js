@@ -1,6 +1,24 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // Cannot submit empty value for input field
+    console.log("hi");
+    const request = new XMLHttpRequest();
+    request.open('POST', '/chatrooms');
+    request.onload = () => {
+        var data = JSON.parse(request.responseText);
+        var x;
+        for(x in data)
+        {
+            var l = document.createElement('li');
+            l.innerHTML = `<a href="/chatroom/${parseInt(x)}">${data[x]}</a>`
+            document.querySelector('ul').append(l);
+            console.log(l);
+        }
+    };
+    var p= new FormData();
+    p.append("rooms","rooms");
+    request.send(p);
+    
     document.querySelector('button').disabled = true;
     document.querySelector('input').onkeyup = () => {
         if(document.querySelector('input').value.length>0)
@@ -15,10 +33,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     
     //reload when back/front are used in the browser
-    if(!!window.performance && window.performance.navigation.type == 2)
+    /*if ((document.querySelector('#refresh').value) === "no")
     {
-    window.location.reload(true);
-    } 
+        document.querySelector('#refresh').value="yes";
+    }
+    else
+    {
+        document.querySelector('#refresh').value="no";
+        window.location=window.location;
+    }*/
+
     // Connect to websocket
     var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
 
