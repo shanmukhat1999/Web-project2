@@ -1,6 +1,27 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // Cannot submit empty value for input field
+    console.log("hi");
+    const request = new XMLHttpRequest();
+    var ch_id = document.querySelector('h2').innerHTML;
+    request.open('POST', '/roomid');
+    request.onload = () => {
+        var data = JSON.parse(request.responseText);
+        var x;
+        console.log(data["msgs"]);
+        document.querySelector('ul').innerHTML="";
+        for(x=0;x<data["msgs"].length;x++)
+        {
+            var l = document.createElement('li');
+            l.innerHTML = data["msgs"][x];
+            document.querySelector('ul').append(l);
+            console.log(data["msgs"][x]);
+        }
+    };
+    var p= new FormData();
+    p.append("room_id",ch_id);
+    request.send(p);
+
     document.querySelector('button').disabled = true;
     document.querySelector('input').onkeyup = () => {
         if(document.querySelector('input').value.length>0)
@@ -14,29 +35,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     //Refreshing when pressed back/front buttons
-    if(!!window.performance && window.performance.navigation.type == 2)
+
+    /*if ((document.querySelector('#refresh').value) === "no")
     {
-    window.location.reload(true);
-    } 
-    // saving the chatid in localstorage to the room number
-    if(!(localStorage.getItem("chatid")))
-    {
-        var k=document.querySelector('h2').innerHTML;
-        if (!(typeof (k) === "number" ))
-        {
-            k=parseInt(k);
-        }
-        localStorage.setItem("chatid",k);
+        document.querySelector('#refresh').value="yes";
     }
     else
     {
-        var k=document.querySelector('h2').innerHTML;
-        if (!(typeof (k) === "number" ))
-        {
-            k=parseInt(k);
-        }
-        localStorage.setItem("chatid",k);
+        document.querySelector('#refresh').value="no";
+        window.location=window.location;
+    }*/    
+    // saving the chatid in localstorage to the room number
+    var k=document.querySelector('h2').innerHTML;
+    if (!(typeof (k) === "number" ))
+    {
+        k=parseInt(k);
     }
+    localStorage.setItem("chatid",k);
     //connect to web socket
     var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
 
