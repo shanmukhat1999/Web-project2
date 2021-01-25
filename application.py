@@ -80,7 +80,8 @@ def chatroom(chatid):
 def chatrooms():
     if "username" not in session:
         return render_template("error.html",message="you have to log in first")
-    session.pop("chatid")    
+    if "chatid" in session:    
+        session.pop("chatid") 
     d={}
     print("sent")
     for i in range(0,len(rooms)):
