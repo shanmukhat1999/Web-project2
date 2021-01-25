@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     request.onload = () => {
         var data = JSON.parse(request.responseText);
         var x;
+        document.querySelector('ul').innerHTML="";
         for(x in data)
         {
             var l = document.createElement('li');
