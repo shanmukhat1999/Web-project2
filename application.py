@@ -76,6 +76,28 @@ def chatroom(chatid):
         session["chatid"]=str(chatid)
     return render_template("chatroom.html",roomname=roomname,messages=messages[chatid],chatid=session["chatid"],username=session["username"])     
         
+@app.route("/chatrooms",methods=["POST"])
+def chatrooms():
+    if "username" not in session:
+        return render_template("error.html",message="you have to log in first")
+    session.pop("chatid")    
+    d={}
+    print("sent")
+    for i in range(0,len(rooms)):
+        d[i+1] = rooms[i]
+    return jsonify(d)   
+
+@app.route("/roomid",methods=["POST"])
+def roomid():
+    if "username" not in session:
+        return render_template("error.html",message="you have to log in first")
+    d={}
+    print("sent")
+    room_id = request.form.get("room_id")
+    room_id=int(room_id)
+    session["chatid"]=str(room_id)
+    d["msgs"] = messages[room_id]
+    return jsonify(d)    
 
 @socketio.on('new room')
 def new_room(data):
@@ -96,16 +118,9 @@ def new_message(data):
     dt_string = now.strftime("%d/%m/%Y %H:%M:%S")	
     k="<"+dt_string+" >\t\t\t\t"+username+" : "+message
     messages[i].append(k)    
-    emit('add message',{"message":k,"chatid":i},broadcast=True)    
+    emit('add message',{"message":k,"chatid":i},broadcast=True)     
 
  
-if __name__ == '__main__':
-    socketio.run(app)
 
-
-
-
-
-
-
-
+if __name__ == "__main__":
+    app.run(debug=True)       
