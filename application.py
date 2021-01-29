@@ -105,7 +105,7 @@ def new_room(data):
     global rooms
     roomname=data["roomname"]
     if roomname in rooms:
-        emit('already exists',{},broadcast=False)
+        emit('already exists',{"r":"r"},broadcast=False)
     else:
         rooms.append(roomname)
         i=len(rooms)-1
