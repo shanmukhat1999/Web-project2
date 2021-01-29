@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('input').value = "";
         document.querySelector('button').disabled = true;
     });  
-    socket.on('already exists', () => {
+    socket.on('already exists', data => {
         alert("That roomname already exists select another name")
     });
 });
