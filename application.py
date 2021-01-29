@@ -104,6 +104,9 @@ def roomid():
 def new_room(data):
     global rooms
     roomname=data["roomname"]
+    if roomname in rooms:
+        emit('already exists')
+        return
     rooms.append(roomname)
     i=len(rooms)-1
     messages[i+1]=[]
