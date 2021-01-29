@@ -72,7 +72,10 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('ul').append(li);
         document.querySelector('input').value = "";
         document.querySelector('button').disabled = true;
-    });    
+    });  
+    socket.on('already exists', () => {
+        alert("That roomname already exists select another name")
+    });
 });
 
 
