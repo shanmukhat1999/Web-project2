@@ -106,11 +106,11 @@ def new_room(data):
     roomname=data["roomname"]
     if roomname in rooms:
         emit('already exists',{},broadcast=False)
-        return
-    rooms.append(roomname)
-    i=len(rooms)-1
-    messages[i+1]=[]
-    emit('add room',{"chatid":len(rooms),"roomname":roomname},broadcast=True)
+    else:
+        rooms.append(roomname)
+        i=len(rooms)-1
+        messages[i+1]=[]
+        emit('add room',{"chatid":len(rooms),"roomname":roomname},broadcast=True)
 
 @socketio.on('new message')
 def new_message(data):
