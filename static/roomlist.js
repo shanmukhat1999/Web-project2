@@ -74,7 +74,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('button').disabled = true;
     });  
     socket.on('already exists', data => {
-        alert("That roomname already exists select another name")
+        window.alert("That roomname already exists select another name");
+        console.log("1");
     });
 });
 
