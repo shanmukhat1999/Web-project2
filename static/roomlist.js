@@ -9,6 +9,11 @@ document.addEventListener('DOMContentLoaded', () => {
         var data = JSON.parse(request.responseText);
         var x;
         document.querySelector('ul').innerHTML="";
+        if("error" in data && data["error"] === "error")
+        {
+            console.log("error");
+        }
+        else
         for(x in data)
         {
             var l = document.createElement('li');
