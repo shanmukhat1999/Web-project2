@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Cannot submit empty value for input field
     console.log("hi");
+    
     const request = new XMLHttpRequest();
     request.open('POST', '/chatrooms');
     request.onload = () => {
@@ -72,12 +73,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('ul').append(li);
         document.querySelector('input').value = "";
         document.querySelector('button').disabled = true;
-    });  
-    socket.on('already exists', data => {
-        window.alert("That roomname already exists select another name");
-        console.log("1");
-    });
+    });   
+    socket.on('already exists', () => {
+        alert("That roomname already exists select another name")
+    });   
 });
-
-
-    
