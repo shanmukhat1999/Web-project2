@@ -81,7 +81,7 @@ def chatrooms():
     if "username" not in session:
         return render_template("error.html",message="you have to log in first")
     if "chatid" in session:    
-        session.pop("chatid") 
+        session.pop("chatid")    
     d={}
     print("sent")
     for i in range(0,len(rooms)):
@@ -105,8 +105,8 @@ def new_room(data):
     global rooms
     roomname=data["roomname"]
     if roomname in rooms:
-        emit('already exists',{"r":"r"},broadcast=False)
-    else:
+        emit('already exists',{},broadcast=False)
+    else:    
         rooms.append(roomname)
         i=len(rooms)-1
         messages[i+1]=[]
@@ -127,4 +127,4 @@ def new_message(data):
  
 
 if __name__ == "__main__":
-    app.run(debug=True)       
+    app.run(debug=True) 
