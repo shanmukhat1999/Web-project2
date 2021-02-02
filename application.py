@@ -79,7 +79,7 @@ def chatroom(chatid):
 @app.route("/chatrooms",methods=["POST"])
 def chatrooms():
     if "username" not in session:
-        return render_template("error.html",message="you have to log in first")
+        return jsonify({"error":"error"})
     if "chatid" in session:    
         session.pop("chatid")    
     d={}
