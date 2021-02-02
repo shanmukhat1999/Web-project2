@@ -91,7 +91,7 @@ def chatrooms():
 @app.route("/roomid",methods=["POST"])
 def roomid():
     if "username" not in session:
-        return render_template("error.html",message="you have to log in first")
+        return jsonify({"error":"error"})
     d={}
     print("sent")
     room_id = request.form.get("room_id")
