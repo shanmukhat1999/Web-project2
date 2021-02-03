@@ -8,7 +8,6 @@ from datetime import datetime
 app = Flask(__name__)
 # configuring session to use filesystem
 
-app.config["SESSION_FILE_DIR"] = mkdtemp()
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
