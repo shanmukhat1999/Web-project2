@@ -13,7 +13,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # configuring socketio
-app.config["SECRET_KEY"] = 'thisisasecret'
+app.config["SECRET_KEY"] = 'skdafkgsdfsahgfasdkgglsdglasgbsbvasdlf'
 socketio = SocketIO(app)
 
 rooms = [] 
