@@ -78,7 +78,6 @@ def chatroom(chatid):
         
 @app.route("/chatrooms",methods=["POST"])
 def chatrooms():
-    print(session["username"])
     if "username" not in session:
         return jsonify({"error":"error"})
     if "chatid" in session:    
