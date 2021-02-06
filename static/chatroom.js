@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Cannot submit empty value for input field
     console.log("hi");
     const request = new XMLHttpRequest();
-    var ch_id = document.querySelector('h2').innerHTML;
+    var ch_id = document.querySelector('h2').dataset.val;
     request.open('POST', '/roomid');
     request.onload = () => {
         var data = JSON.parse(request.responseText);
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location=window.location;
     }*/    
     // saving the chatid in localstorage to the room number
-    var k=document.querySelector('h2').innerHTML;
+    var k=document.querySelector('h2').dataset.val;
     if (!(typeof (k) === "number" ))
     {
         k=parseInt(k);
@@ -65,11 +65,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         //when new message is entered
         document.querySelector('button').onclick =  () => {
+            document.querySelector('button').disabled = true;
             const message = document.querySelector('input').value;
-            var ci=document.querySelector('h2').innerHTML;
-            ci=parseInt(ci);
-            var name=document.querySelector('input').dataset.val;
-            socket.emit('new message', {'message': message,'chat_id':ci,'username':name});
+            if(message.length === 0)
+            {
+                alert("Type in your message")
+            }
+            else
+            {
+                var ci=document.querySelector('h2').dataset.val;
+                ci=parseInt(ci);
+                var name=document.querySelector('input').dataset.val;
+                socket.emit('new message', {'message': message,'chat_id':ci,'username':name});
+            }
         };   
     });
 
@@ -93,6 +101,11 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelector('ul').append(li);
         }
     });
-    
+    socket.on("This username doesnot exist", () => {
+        alert("This username doesnot exist")
+    });
+    socket.on("This room doesnot exist", () => {
+        alert("This room doesnot exist")
+    });
     
 });
