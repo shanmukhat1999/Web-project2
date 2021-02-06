@@ -9,11 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
         var data = JSON.parse(request.responseText);
         var x;
         document.querySelector('ul').innerHTML="";
-        if("error" in data && data["error"] === "error")
-        {
-            console.log("error");
-        }
-        else
         for(x in data)
         {
             var l = document.createElement('li');
@@ -58,7 +53,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         
         document.querySelector('button').onclick  = () => {
+                document.querySelector('button').disabled=true;
                 const roomname = document.querySelector('input').value;
+                if(roomname.length === 0)
+                {
+                    alert("Enter a room name")
+                }
+                else
                 socket.emit('new room', {'roomname': roomname});
             };
         });
@@ -77,9 +78,11 @@ document.addEventListener('DOMContentLoaded', () => {
         li.innerHTML = `<a href="/chatroom/${parseInt(a)}">${data["roomname"]}</a>`;
         document.querySelector('ul').append(li);
         document.querySelector('input').value = "";
-        document.querySelector('button').disabled = true;
     });   
     socket.on('already exists', () => {
         alert("That roomname already exists select another name")
     });   
 });
+
+
+    
