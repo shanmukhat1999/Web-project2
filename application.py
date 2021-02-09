@@ -9,6 +9,8 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 from dotenv import load_dotenv
 load_dotenv()
 
+
+ASSETS_DIR = os.path.dirname(os.path.abspath(__file__))
 app = Flask(__name__)
 # configuring session to use filesystem
 
@@ -159,4 +161,5 @@ def new_message(data):
  
 
 if __name__ == "__main__":
-    app.run(debug=True)       
+    context = ('local.crt', 'local.key')#certificate and key files
+    app.run(debug=True, ssl_context=context)       
