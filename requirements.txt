@@ -2,7 +2,7 @@ Flask==1.1.0
 Werkzeug==0.15.4
 wheel==0.24.0
 redis==2.10.5
-Flask-SocketIO==5.0.1
+Flask-SocketIO==4.3.1
 Flask-Session==0.2.3
 itsdangerous==1.1.0
 Jinja2==2.10.1
