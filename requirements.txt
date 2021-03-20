@@ -5,7 +5,7 @@ redis==2.10.5
 Flask-SocketIO==4.3.1
 Flask-Session==0.2.3
 itsdangerous==1.1.0
-Jinja2==2.10.1
+Jinja2==2.11.3
 MarkupSafe==1.1.1
 Click==7.0
 gunicorn==18.0.0
